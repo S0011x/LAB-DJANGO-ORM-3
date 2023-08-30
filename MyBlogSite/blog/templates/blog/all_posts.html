@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} All posts in Our blog {% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between mt-4">
+    {% if "search" in request.GET %}
+    <h1> Search Results for "<span class="text-success"> {{ request.GET.search }} </span>"</h1>
+    {% else %}
+    <h1> Our posts</h1>
+    {% endif %}
+
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Order By
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'books:all_books_view' %}">All</a></li>
+          <li><a class="dropdown-item" href="{% url 'books:all_books_view' %}?top=True">by Top Rating</a></li>
+        </ul>
+      </div>
+</div>
+
+<div class="row">
+{% for post in blog %}
+    <div class="col-4 mt-4">
+        <div class="d-flex flex-column gap-3 border border-1 shadow rounded-4 p-4 mt-1  h-100 justify-content-between">
+            <img src="{{ post.photo.url }}" class="rounded-4 object-fit-cover border border-1 book-poster" />
+            <h3>{{ post.title }}</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <h6>{{ post.content }}</h6>
+                <div class="d-flex gap-1 align-items-center">
+                    <h6 class="p-0 m-0"> {{post.photo}}</h6>
+                    <span class="material-symbols-outlined">star</span>
+                </div>
+                
+            </div>
+            
+            <a href="{% url 'blog:post_detail' post.id %}" class="d-flex justify-content-between text-decoration-none">
+
+                <span class="material-symbols-outlined">more</span>
+            </a>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+{% endblock %}

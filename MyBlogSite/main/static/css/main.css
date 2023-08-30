@@ -1,0 +1,17 @@
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.dark {
+    background-color: rgb(60, 60, 60);
+    color: white;
+}
+
+.book-poster {
+    height: 50vh;
+}
+
+.book-poster-update{
+    height: 150px;
+    width: 150px;
+}
